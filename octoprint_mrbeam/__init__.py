@@ -694,7 +694,7 @@ class MrBeamPlugin(
                 "css/hopscotch.min.css",
                 "css/wizard.css",
                 "css/tab_messages.css",
-                "css/software_update.css"
+                "css/software_update.css",
             ],
             less=["less/mrbeam.less"],
         )
@@ -780,7 +780,7 @@ class MrBeamPlugin(
                 webcamStream=self._settings.get(["cam", "frontendUrl"]),
                 enableFocus=enable_focus,
                 safetyGlasses=safety_glasses,
-                enableTemperatureGraph=False,
+                enableTemperatureGraph=True,
                 enableAccessControl=enable_accesscontrol,
                 accessControlActive=accesscontrol_active,
                 enableSdSupport=False,
@@ -1318,7 +1318,7 @@ class MrBeamPlugin(
             firstRun=self.isFirstRun(),
             version=dict(number=VERSION, display=DISPLAY_VERSION, branch=BRANCH),
             uiApiKey=UI_API_KEY,
-            templates=dict(tab=[]),
+            # templates=dict(tab=[]),
             pluginNames=dict(),
             locales=dict(),
             supportedExtensions=[],
