@@ -742,6 +742,9 @@ class IoBeamHandler(object):
                 dataset,
                 dict(val=vals[self.MESSAGE_ACTION_FAN_RPM]),
             )
+            self._plugin._printer._addTemperatureData(
+                custom={"fan rpm": (vals[self.MESSAGE_ACTION_FAN_RPM] / 100, 0)}
+            )
             self._call_callback(
                 IoBeamValueEvents.DUST_VALUE,
                 dataset,
@@ -766,6 +769,9 @@ class IoBeamHandler(object):
                 if rpm_val is not None:
                     self._call_callback(
                         IoBeamValueEvents.RPM_VALUE, dataset, dict(val=rpm_val)
+                    )
+                    self._plugin._printer._addTemperatureData(
+                        custom={"fan rpm": (rpm_val / 100, 0)}
                     )
 
             if self.MESSAGE_ACTION_FAN_STATE in dataset:
@@ -1072,13 +1078,9 @@ class IoBeamHandler(object):
             data = {
                 "pressure": dataset["dust"],
             }
-            # self._plugin._printer._addTemperatureData(
-            #     {
-            #         0: None,
-            #         1: {0: dataset["dust"] / 10, 1: 0},
-            #     },
-            #     None,
-            # )
+            self._plugin._printer._addTemperatureData(
+                custom={"pressure": (dataset["dust"] / 10, 0)}
+            )
             # self._plugin._printer._addTemperatureData(
             #     None,
             #     (dataset["dust"] / 10, 0),
