@@ -1075,16 +1075,9 @@ class IoBeamHandler(object):
         """
         self._logger.info("exhaust dataset: '%s'", dataset)
         if "dust" in dataset:
-            data = {
-                "pressure": dataset["dust"],
-            }
             self._plugin._printer._addTemperatureData(
                 custom={"pressure": (dataset["dust"] / 10, 0)}
             )
-            # self._plugin._printer._addTemperatureData(
-            #     None,
-            #     (dataset["dust"] / 10, 0),
-            # )
         return 0
 
     def _handle_link_quality(self, dataset):
