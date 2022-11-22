@@ -142,20 +142,5 @@ jobs:
               {
                 "fields": {
                   "summary": "'"$issue_name"'" 
-                },
-                "update": {
-                  "issuelinks": [
-                    {
-                      "add": {
-                        "type": {
-                          "name":"Test",
-                          "outward":"tests"
-                        },
-                        "outwardIssue" : {
-                          "key": "'"$tests_issue"'" 
-                        }
-                      }
-                    }
-                  ]
                 }
               }
