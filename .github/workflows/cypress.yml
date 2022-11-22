@@ -138,7 +138,7 @@ jobs:
           echo $tests_issue
 
           curl -D- --trace -u ${{ secrets.JIRA_SW_EMAIL }}:${{ secrets.JIRA_SW_API_TOKEN }} -X PUT $issue_url -H 'Content-Type: application/json' \
-            --data
+            --data \
               {
                 "fields": {
                   "summary": "'"$issue_name"'" 
