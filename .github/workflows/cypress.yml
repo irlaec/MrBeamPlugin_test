@@ -134,7 +134,7 @@ jobs:
           issue_name="Test plan for ${{ github.event.head_commit.message }}"
           echo $issue_name
 
-          tests_issue=$(echo ${{ github.event.head_commit.message }} | sed -E -e 's/.*(SW-[1-9]+).*/\1/g')
+          tests_issue=$(echo ${{ github.event.head_commit.message }} | sed -E -e 's/.*(SW-[0-9]+).*/\1/g')
           echo $tests_issue
 
           curl -D- --trace -u ${{ secrets.JIRA_SW_EMAIL }}:${{ secrets.JIRA_SW_API_TOKEN }} -X PUT $issue_url -H 'Content-Type: application/json' \
