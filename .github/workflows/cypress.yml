@@ -21,6 +21,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: DEBUG INFO
+        run: |
+          echo ${{ github.event.head_commit.message }}
+          echo ${{ github.event.head_commit }}
+          echo ${{ github.event }}
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       - name: Build and export
