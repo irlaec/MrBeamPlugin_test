@@ -140,10 +140,11 @@ jobs:
           tested_issue_id=$(echo $last_commit_message | sed -E -e 's/.*(SW-[0-9]+).*/\1/g')
           echo $tested_issue_id
 
-          tested_issue_details=$(curl -u ${{ secrets.JIRA_SW_EMAIL }}:${{ secrets.JIRA_SW_API_TOKEN }} -X GET 'https://mr-beam.atlassian.net/rest/api/2/issue/'"$tested_issue_id"' )
-          tested_issue_assignee=$(printf '%s\n' '$tested_issue_detail' | jq -r .fields.assignee.5cc814a550ff750e51015ec7)
+          tested_issue_details=$(curl -u ${{ secrets.JIRA_SW_EMAIL }}:${{ secrets.JIRA_SW_API_TOKEN }} -X GET 'https://mr-beam.atlassian.net/rest/api/2/issue/"$tested_issue_id"' )
+          tested_issue_assignee=$(printf '%s' $tested_issue_details | jq --raw-output .fields.assignee.accountId)
           echo $tested_issue_assignee
-          tested_issue_fix_versions=$(printf '%s\n' '$tested_issue_detail' | jq -r .fields.fixVersions)
+
+          tested_issue_fix_versions=$(printf '%s\n' '$tested_issue_details' | jq -r .fields.fixVersions)
           echo $tested_issue_fix_versions
 
           curl -D- -u ${{ secrets.JIRA_SW_EMAIL }}:${{ secrets.JIRA_SW_API_TOKEN }} -X PUT $test_exec_id -H 'Content-Type: application/json' \
