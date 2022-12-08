@@ -155,7 +155,7 @@ jobs:
               '{
                 "fields": {
                   "summary": "[GitHub:Cypress] '"$test_exec_summary"'",
-                  "assignee": { "accountId": "$tested_issue_assignee" }
+                  "assignee": { "accountId": "'"$tested_issue_assignee"'" }
                 },
                 "update": {
                   "issuelinks": [
@@ -173,7 +173,7 @@ jobs:
                   ],
                   "fixVersions": [
                     {
-                      "add": {"name": "'"tested_issue_fix_version"'"}
+                      "add": {"name": "'"$tested_issue_fix_version"'"}
                     }
                   ]
                 }
