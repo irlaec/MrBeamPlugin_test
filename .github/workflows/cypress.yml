@@ -146,7 +146,7 @@ jobs:
           tested_issue_assignee=$(printf '%s' $tested_issue_details | jq --raw-output .fields.assignee.accountId)
           echo $tested_issue_assignee
 
-          tested_issue_fix_version=$(printf '%s' '$tested_issue_details' | jq -r .fields.fixVersions[].name)
+          tested_issue_fix_version=$(printf '%s' $tested_issue_details | jq -r .fields.fixVersions[].name)
           echo $tested_issue_fix_version
 
           curl -D- -u ${{ secrets.JIRA_SW_EMAIL }}:${{ secrets.JIRA_SW_API_TOKEN }} \
@@ -185,4 +185,3 @@ jobs:
           curl -D- -u ${{ secrets.JIRA_SW_EMAIL }}:${{ secrets.JIRA_SW_API_TOKEN }} \
             -X POST $test_exec_url'/transitions' -H 'Content-Type: application/json' \
             --data '{ "transition": { "id": "21" } }'
-
