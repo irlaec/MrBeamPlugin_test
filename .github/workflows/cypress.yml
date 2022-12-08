@@ -142,7 +142,7 @@ jobs:
           tested_issue_id=$(echo $last_commit_message | sed -E -e 's/.*(SW-[0-9]+).*/\1/g')
           echo $tested_issue_id
 
-          tested_issue_details=$(curl -u ${{ secrets.JIRA_SW_EMAIL }}:${{ secrets.JIRA_SW_API_TOKEN }} -X GET 'https://mr-beam.atlassian.net/rest/api/2/issue/"$tested_issue_id"' )
+          tested_issue_details=$(curl -u ${{ secrets.JIRA_SW_EMAIL }}:${{ secrets.JIRA_SW_API_TOKEN }} -X GET 'https://mr-beam.atlassian.net/rest/api/2/issue/'$tested_issue_id )
           tested_issue_assignee=$(printf '%s' $tested_issue_details | jq --raw-output .fields.assignee.accountId)
           echo $tested_issue_assignee
 
@@ -183,6 +183,6 @@ jobs:
         # 21 is the id for the status "Done"
         run: |
           curl -D- -u ${{ secrets.JIRA_SW_EMAIL }}:${{ secrets.JIRA_SW_API_TOKEN }} \
-            -X POST $test_exec_url/transitions -H 'Content-Type: application/json' \
+            -X POST $test_exec_url'/transitions' -H 'Content-Type: application/json' \
             --data '{ "transition": { "id": "21" } }'
 
