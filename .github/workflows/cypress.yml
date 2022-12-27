@@ -176,14 +176,7 @@ jobs:
                   ]
                 }
               }'
-
-      - name: Move test execution to done
-        # 21 is the id for the status "Done"
-        run: |
-          curl -D- -u ${{ secrets.JIRA_SW_EMAIL }}:${{ secrets.JIRA_SW_API_TOKEN }} \
-            -X POST $test_exec_url'/transitions' -H 'Content-Type: application/json' \
-            --data '{ "transition": { "id": "21" } }'
-
+      
       - name: Add fix version if available
         continue-on-error: true
         if: ${{ steps.issue-details.outputs.tested_issue_fix_version }}
@@ -200,3 +193,10 @@ jobs:
                   ]
                 }
               }'
+
+      - name: Move test execution to done
+        # 21 is the id for the status "Done"
+        run: |
+          curl -D- -u ${{ secrets.JIRA_SW_EMAIL }}:${{ secrets.JIRA_SW_API_TOKEN }} \
+            -X POST $test_exec_url'/transitions' -H 'Content-Type: application/json' \
+            --data '{ "transition": { "id": "21" } }'
